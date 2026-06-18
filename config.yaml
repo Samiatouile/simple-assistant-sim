@@ -1,0 +1,56 @@
+# Paramètres versionnés du simulateur "Simple" — neobanque fictive.
+# Toute modification d'un de ces paramètres doit être considérée comme une
+# nouvelle "itération" : on compare les rapports avant/après UNE SEULE
+# variable changée à la fois (philosophie du projet, voir README).
+
+kb:
+  version: "1.0.0"
+  path: "data/kb.jsonl"
+
+golden_set:
+  version: "1.0.0"
+  path: "data/golden_set.jsonl"
+  # Le golden set est FIGÉ : ne pas le régénérer entre deux mesures comparées.
+
+retrieval:
+  top_k: 3
+  vectorizer: "tfidf"  # autre valeur possible plus tard: "embeddings"
+
+model:
+  # "mock" = déterministe, sans clé API. "anthropic" = API réelle si
+  # ANTHROPIC_API_KEY est présent dans l'environnement.
+  provider: "auto"  # "auto" choisit anthropic si la clé existe, sinon mock
+  # Le nom du modèle Anthropic n'est jamais hardcodé : on lit la variable
+  # d'environnement ANTHROPIC_MODEL (avec une valeur par défaut raisonnable
+  # si elle est absente).
+  anthropic_model_env: "ANTHROPIC_MODEL"
+  anthropic_model_default: "claude-haiku-4-5"
+  temperature_judge: 0.0
+
+paliers:
+  - Go
+  - Plus
+  - Prime
+  - Metal
+
+orientations:
+  - transactionnel
+  - informationnel
+  - support
+  - onboarding
+
+escalade:
+  # Mots/critères qui déclenchent une escalade obligatoire côté SAV.
+  motifs_critiques:
+    - "fraude"
+    - "piratage"
+    - "carte perdue a l'etranger"
+    - "virement non autorise"
+    - "menace"
+    - "deces"
+
+report:
+  out_dir: "reports"
+  csv_detail: "reports/resultats_detail.csv"
+  csv_kpi: "reports/kpi_ventiles.csv"
+  markdown: "reports/rapport.md"
