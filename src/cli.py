@@ -5,6 +5,7 @@ Usage :
     python -m src.cli build-testset
     python -m src.cli run-eval
     python -m src.cli report
+    python -m src.cli chat
 """
 import argparse
 import sys
@@ -21,6 +22,7 @@ def main():
     sub.add_parser("build-testset", help="Génère le golden set de questions annotées (data/golden_set.jsonl).")
     sub.add_parser("run-eval", help="Fait tourner l'assistant simulé sur le golden set et note les réponses.")
     sub.add_parser("report", help="Agrège les KPI de fiabilité et produit le rapport (reports/).")
+    sub.add_parser("chat", help="Lance une boucle interactive pour tester l'assistant manuellement.")
 
     args = parser.parse_args()
 
@@ -35,6 +37,9 @@ def main():
         run()
     elif args.commande == "report":
         from src.report import main as run
+        run()
+    elif args.commande == "chat":
+        from src.chat import main as run
         run()
     else:
         parser.print_help()
