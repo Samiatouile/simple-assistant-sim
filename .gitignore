@@ -1,0 +1,19 @@
+# Environnement Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Secrets / config locale
+.env
+*.env
+
+# OS / éditeur
+.DS_Store
+.vscode/
+.idea/
+
+# Sorties générées — décommente si tu NE veux PAS les versionner
+# reports/
+# data/
