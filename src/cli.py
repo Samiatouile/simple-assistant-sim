@@ -6,6 +6,7 @@ Usage :
     python -m src.cli run-eval
     python -m src.cli report
     python -m src.cli chat
+    python -m src.cli log-iteration
 """
 import argparse
 import sys
@@ -23,6 +24,7 @@ def main():
     sub.add_parser("run-eval", help="Fait tourner l'assistant simulé sur le golden set et note les réponses.")
     sub.add_parser("report", help="Agrège les KPI de fiabilité et produit le rapport (reports/).")
     sub.add_parser("chat", help="Lance une boucle interactive pour tester l'assistant manuellement.")
+    sub.add_parser("log-iteration", help="Compare les KPI courant/précédent et journalise l'itération dans JOURNAL.md.")
 
     args = parser.parse_args()
 
@@ -40,6 +42,9 @@ def main():
         run()
     elif args.commande == "chat":
         from src.chat import main as run
+        run()
+    elif args.commande == "log-iteration":
+        from src.log_iteration import main as run
         run()
     else:
         parser.print_help()

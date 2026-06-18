@@ -23,6 +23,7 @@ import yaml
 
 from src.assistant import build_assistant
 from src.judge import juger
+from src.kpi_backup import backup_kpi
 from src.model import get_llm_client
 from src.retrieval import load_kb
 
@@ -77,6 +78,16 @@ def _verifier_exactitude(reponse: str, reponse_attendue: str) -> int | None:
 def main():
     with open("config.yaml", encoding="utf-8") as f:
         config = yaml.safe_load(f)
+
+    # Avant de lancer une nouvelle évaluation, on sauvegarde le KPI de
+    # l'itération précédente (encore sur le disque tel que produit par le
+    # dernier `report`) pour que `log-iteration` puisse comparer avant/après.
+    chemin_kpi = config["report"]["csv_kpi"]
+    chemin_kpi_precedent = config["report"]["csv_kpi_precedent"]
+    if backup_kpi(chemin_kpi, chemin_kpi_precedent):
+        print(f"KPI de l'itération précédente sauvegardés -> {chemin_kpi_precedent}")
+    else:
+        print("Aucun KPI précédent trouvé : pas de comparaison possible pour cette itération.")
 
     golden = _charger_golden_set(config["golden_set"]["path"])
     kb_units = {u["id"]: u for u in load_kb(config["kb"]["path"])}
