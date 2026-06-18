@@ -1,6 +1,7 @@
 pandas>=2.0
 scikit-learn>=1.3
 pyyaml>=6.0
+tabulate>=0.9
 
 # Optionnel : uniquement nécessaire si ANTHROPIC_API_KEY est défini
 anthropic>=0.30

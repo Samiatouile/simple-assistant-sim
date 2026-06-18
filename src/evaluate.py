@@ -100,19 +100,24 @@ def main():
 
         escalade_attendue = int(cas["comportement_attendu"] == "escalader")
         escalade_obtenue = int(sortie["comportement"] == "escalader")
-        escalade_pertinente = None
-        if escalade_attendue:
-            escalade_pertinente = escalade_obtenue
-        elif escalade_obtenue and not escalade_attendue:
-            # Fausse escalade = couverture dégradée (cf. ci-dessous), pas
-            # une "escalade pertinente" puisqu'aucune escalade n'était due.
-            escalade_pertinente = 0
+        # "escalade pertinente" ne se mesure que quand une escalade était
+        # due ; une fausse escalade (non due) est déjà pénalisée par
+        # comportement_correct, pas besoin de la compter deux fois ici.
+        escalade_pertinente = escalade_obtenue if escalade_attendue else None
 
         couverture_ok = int(not (sortie["intention_predite"] == "hors_perimetre"
                                   and cas["intention"] != "hors_perimetre"))
 
-        jugement_ancrage = juger(llm, question, sortie["reponse"], sources_texte, "ancrage")
-        jugement_pertinence = juger(llm, question, sortie["reponse"], sources_texte, "pertinence")
+        # L'ancrage/la pertinence ne s'évaluent que pour les réponses qui
+        # affirment un fait (orientation informationnel/onboarding/support) :
+        # une demande de confirmation transactionnelle ne fait aucune
+        # affirmation factuelle, donc le critère n'est pas applicable.
+        if sortie["comportement"] == "demander_confirmation":
+            jugement_ancrage = {"score": None, "justification": "Non applicable (demande de confirmation, aucune affirmation factuelle)."}
+            jugement_pertinence = {"score": None, "justification": "Non applicable (demande de confirmation, aucune affirmation factuelle)."}
+        else:
+            jugement_ancrage = juger(llm, question, sortie["reponse"], sources_texte, "ancrage")
+            jugement_pertinence = juger(llm, question, sortie["reponse"], sources_texte, "pertinence")
 
         lignes.append({
             "id": cas["id"],
