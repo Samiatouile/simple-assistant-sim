@@ -53,4 +53,8 @@ report:
   out_dir: "reports"
   csv_detail: "reports/resultats_detail.csv"
   csv_kpi: "reports/kpi_ventiles.csv"
+  csv_kpi_precedent: "reports/kpi_ventiles_precedent.csv"
   markdown: "reports/rapport.md"
+
+journal:
+  path: "JOURNAL.md"
