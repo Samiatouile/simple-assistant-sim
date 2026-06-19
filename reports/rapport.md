@@ -8,7 +8,7 @@
 
 | _global          |   n | intention_correcte   | comportement_correct   | exactitude   | couverture_ok   | ancrage   | pertinence   | escalade_pertinente   |
 |:-----------------|----:|:---------------------|:-----------------------|:-------------|:----------------|:----------|:-------------|:----------------------|
-| toutes questions |  68 | 88%                  | 85%                    | 76%          | 96%             | 100%      | 100%         | 67%                   |
+| toutes questions |  68 | 88%                  | 87%                    | 76%          | 96%             | 100%      | 100%         | 75%                   |
 
 ## Ventilation par orientation
 
@@ -16,7 +16,7 @@
 |:---------------|----:|:---------------------|:-----------------------|:-------------|:----------------|:----------|:-------------|:----------------------|
 | informationnel |  27 | 85%                  | 93%                    | 78%          | 100%            | 100%      | 100%         | —                     |
 | onboarding     |  12 | 100%                 | 92%                    | 75%          | 100%            | 100%      | 100%         | —                     |
-| support        |  19 | 84%                  | 68%                    | 71%          | 84%             | 100%      | 100%         | 67%                   |
+| support        |  19 | 84%                  | 74%                    | 71%          | 84%             | 100%      | 100%         | 75%                   |
 | transactionnel |  10 | 90%                  | 90%                    | —            | 100%            | 100%      | 100%         | —                     |
 
 ## Ventilation par orientation × intention
@@ -35,7 +35,7 @@
 | support        | compte_bloque        |   2 | 100%                 | 0%                     | —            | 100%            | 100%      | 100%         | 0%                    |
 | support        | fraude               |   3 | 100%                 | 67%                    | —            | 100%            | 100%      | 100%         | 67%                   |
 | support        | hors_perimetre       |   3 | 100%                 | 100%                   | —            | 100%            | 100%      | 100%         | 100%                  |
-| support        | litige_paiement      |   4 | 75%                  | 75%                    | 100%         | 75%             | 100%      | 100%         | 50%                   |
+| support        | litige_paiement      |   4 | 75%                  | 100%                   | 100%         | 75%             | 100%      | 100%         | 100%                  |
 | support        | opposition_carte     |   4 | 50%                  | 75%                    | 50%          | 50%             | 100%      | 100%         | 100%                  |
 | transactionnel | gestion_carte        |   3 | 67%                  | 67%                    | —            | 100%            | 100%      | 100%         | —                     |
 | transactionnel | paiement             |   3 | 100%                 | 100%                   | —            | 100%            | —         | —            | —                     |
@@ -49,7 +49,7 @@
 | Metal    |   8 | 100%                 | 88%                    | 88%          | 100%            | 100%      | 100%         | —                     |
 | Plus     |   5 | 80%                  | 100%                   | 100%         | 100%            | 100%      | 100%         | —                     |
 | Prime    |   7 | 86%                  | 86%                    | 71%          | 100%            | 100%      | 100%         | —                     |
-| nan      |  38 | 89%                  | 79%                    | 75%          | 92%             | 100%      | 100%         | 67%                   |
+| nan      |  38 | 89%                  | 82%                    | 75%          | 92%             | 100%      | 100%         | 75%                   |
 
 ## Alertes (KPI nettement sous la moyenne)
 
@@ -58,15 +58,15 @@ Ces alertes signalent probablement les défauts de donnée documentés dans `dat
 - **intention_correcte** dégradé pour orientation=`informationnel` / intention=`frais_virement` : 40% (moyenne globale : 90%)
 - **intention_correcte** dégradé pour orientation=`support` / intention=`opposition_carte` : 50% (moyenne globale : 90%)
 - **intention_correcte** dégradé pour orientation=`transactionnel` / intention=`gestion_carte` : 67% (moyenne globale : 90%)
-- **comportement_correct** dégradé pour orientation=`informationnel` / intention=`changer_palier` : 67% (moyenne globale : 82%)
-- **comportement_correct** dégradé pour orientation=`support` / intention=`carte_bloquee` : 67% (moyenne globale : 82%)
-- **comportement_correct** dégradé pour orientation=`support` / intention=`compte_bloque` : 0% (moyenne globale : 82%)
-- **comportement_correct** dégradé pour orientation=`support` / intention=`fraude` : 67% (moyenne globale : 82%)
-- **comportement_correct** dégradé pour orientation=`transactionnel` / intention=`gestion_carte` : 67% (moyenne globale : 82%)
+- **comportement_correct** dégradé pour orientation=`informationnel` / intention=`changer_palier` : 67% (moyenne globale : 83%)
+- **comportement_correct** dégradé pour orientation=`support` / intention=`carte_bloquee` : 67% (moyenne globale : 83%)
+- **comportement_correct** dégradé pour orientation=`support` / intention=`compte_bloque` : 0% (moyenne globale : 83%)
+- **comportement_correct** dégradé pour orientation=`support` / intention=`fraude` : 67% (moyenne globale : 83%)
+- **comportement_correct** dégradé pour orientation=`transactionnel` / intention=`gestion_carte` : 67% (moyenne globale : 83%)
 - **exactitude** dégradé pour orientation=`informationnel` / intention=`plafond_retrait` : 50% (moyenne globale : 76%)
 - **exactitude** dégradé pour orientation=`support` / intention=`opposition_carte` : 50% (moyenne globale : 76%)
 - **couverture_ok** dégradé pour orientation=`support` / intention=`opposition_carte` : 50% (moyenne globale : 96%)
-- **escalade_pertinente** dégradé pour orientation=`support` / intention=`compte_bloque` : 0% (moyenne globale : 63%)
+- **escalade_pertinente** dégradé pour orientation=`support` / intention=`compte_bloque` : 0% (moyenne globale : 73%)
 
 ## Comment lire ce rapport
 
