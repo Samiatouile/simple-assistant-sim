@@ -3,7 +3,7 @@ d'itérations (`JOURNAL.md`).
 
 Compare `reports/kpi_ventiles.csv` (courant) à
 `reports/kpi_ventiles_precedent.csv` (sauvegardé automatiquement par
-`run-eval`, voir `src/kpi_backup.py`), calcule les deltas des KPI niveau
+`report`, voir `src/kpi_backup.py`), calcule les deltas des KPI niveau
 global / orientation / palier, et ajoute une nouvelle entrée à la fin de
 `JOURNAL.md` avec :
   - un titre numéroté automatiquement ;
@@ -126,8 +126,8 @@ def main():
             "trouvé (première itération journalisée, ou KPI jamais régénérés depuis)."
         ]
     else:
-        df_courant = pd.read_csv(chemin_courant)
-        df_precedent = pd.read_csv(chemin_precedent)
+        df_courant = pd.read_csv(chemin_courant, encoding="utf-8")
+        df_precedent = pd.read_csv(chemin_precedent, encoding="utf-8")
         deltas = calculer_deltas(df_courant, df_precedent)
         if deltas:
             lignes_resultat = [_formater_delta(d) for d in deltas]

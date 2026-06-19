@@ -1,6 +1,6 @@
 """Petite fonction utilitaire : sauvegarde le KPI courant en "précédent"
 avant qu'il ne soit écrasé, pour permettre la comparaison d'une itération
-à l'autre (utilisée par `run-eval` et lue par `log-iteration`).
+à l'autre (utilisée par `report` et lue par `log-iteration`).
 """
 import os
 import shutil
