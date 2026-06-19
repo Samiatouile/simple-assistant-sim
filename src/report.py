@@ -12,6 +12,8 @@ from __future__ import annotations
 import pandas as pd
 import yaml
 
+from src.kpi_backup import backup_kpi
+
 SEUIL_ALERTE = 0.7  # un KPI sous ce seuil, alors que la moyenne globale est nettement au-dessus, déclenche une alerte
 
 
@@ -58,7 +60,7 @@ def main():
     with open("config.yaml", encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
-    df = pd.read_csv(config["report"]["csv_detail"])
+    df = pd.read_csv(config["report"]["csv_detail"], encoding="utf-8")
 
     global_kpi = _kpi_par(df, [])
     par_orientation = _kpi_par(df, ["orientation"])
@@ -72,7 +74,18 @@ def main():
     par_palier.insert(0, "niveau", "palier")
     kpi_complet = pd.concat([global_kpi, par_orientation, par_orientation_intention, par_palier],
                              ignore_index=True)
-    kpi_complet.to_csv(config["report"]["csv_kpi"], index=False)
+
+    # Avant d'écraser le KPI courant, on le sauvegarde comme "précédent" :
+    # log-iteration compare alors automatiquement la mesure d'avant ce
+    # `report` à celle d'après, sans copie manuelle.
+    chemin_kpi = config["report"]["csv_kpi"]
+    chemin_kpi_precedent = config["report"]["csv_kpi_precedent"]
+    if backup_kpi(chemin_kpi, chemin_kpi_precedent):
+        print(f"KPI de l'itération précédente sauvegardés -> {chemin_kpi_precedent}")
+    else:
+        print("Aucun KPI précédent trouvé : pas de comparaison possible pour cette itération.")
+
+    kpi_complet.to_csv(chemin_kpi, index=False, encoding="utf-8")
 
     alertes = _detecter_alertes(par_orientation_intention)
 

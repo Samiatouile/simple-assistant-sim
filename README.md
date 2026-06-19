@@ -152,3 +152,18 @@ retrieval, corriger un défaut de la KB, changer un prompt), on ne change
 on compare les deux `kpi_ventiles.csv` obtenus. C'est cette discipline qui
 rend la mesure de fiabilité utile et actionnable, plutôt qu'un chiffre
 isolé sans levier d'amélioration clair.
+
+À chaque `report`, le `reports/kpi_ventiles.csv` courant est automatiquement
+sauvegardé dans `reports/kpi_ventiles_precedent.csv` *avant* d'être écrasé
+par la nouvelle mesure : aucune copie manuelle n'est nécessaire pour
+comparer une itération à la précédente.
+
+```
+python -m src.cli log-iteration    # compare kpi_ventiles.csv (courant) à
+                                    # kpi_ventiles_precedent.csv (précédent),
+                                    # et journalise le delta dans JOURNAL.md
+```
+
+S'il n'existe pas encore de `reports/kpi_ventiles_precedent.csv` (toute
+première mesure), `log-iteration` l'indique clairement plutôt que de
+comparer du vide.
